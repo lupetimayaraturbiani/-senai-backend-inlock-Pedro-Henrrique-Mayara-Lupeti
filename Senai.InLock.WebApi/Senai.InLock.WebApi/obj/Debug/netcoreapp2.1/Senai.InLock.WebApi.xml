@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Senai.InLock.WebApi</name>
+    </assembly>
+    <members>
+        <member name="P:Senai.InLock.WebApi.Controllers.LoginController._usuarioRepository">
+            <summary>
+            Cria um objeto _usuarioRepository que irá receber todos os métodos definidos na interface
+            </summary>
+        </member>
+        <member name="M:Senai.InLock.WebApi.Controllers.LoginController.#ctor">
+            <summary>
+            Instancia este objeto para que haja a referência aos métodos no repositório
+            </summary>
+        </member>
+        <member name="M:Senai.InLock.WebApi.Controllers.LoginController.Post(Senai.InLock.WebApi.ViewModels.LoginViewModel)">
+            <summary>
+            Valida o usuário
+            </summary>
+            <param name="login">Objeto login que contém o e-mail e a senha do usuário</param>
+            <returns>Retorna um token com as informações do usuário</returns>
+        </member>
+        <member name="M:Senai.InLock.WebApi.Interfaces.ITipoUsuarioRepository.Listar">
+            <summary>
+            Lista os Tipos de Usuarios do Sistema
+            </summary>
+            <returns>Retorna uma lista de Tipos de Usuarios</returns>
+        </member>
+        <member name="M:Senai.InLock.WebApi.Interfaces.IUsuarioRepository.Listar">
+            <summary>
+            Lista todos os Usuarios do sistema
+            </summary>
+            <returns>Retorna uma lista de usuarios</returns>
+        </member>
+        <member name="M:Senai.InLock.WebApi.Interfaces.IUsuarioRepository.Cadastrar(Senai.InLock.WebApi.Domains.UsuarioDomain)">
+            <summary>
+            Cadastra um novo Usuario no sistema
+            </summary>
+            <param name="novoUsuario">Objeto novoUsuario que será cadastrado</param>
+        </member>
+        <member name="M:Senai.InLock.WebApi.Interfaces.IUsuarioRepository.Atualizar(System.Int32,Senai.InLock.WebApi.Domains.UsuarioDomain)">
+            <summary>
+            Atualiza os usuarios do sistema
+            </summary>
+            <param name="id">ID do usuario que será atualizado</param>
+            <param name="UsuarioAtualizado">objeto UsuarioAtualizado que será atualizado</param>
+        </member>
+        <member name="M:Senai.InLock.WebApi.Interfaces.IUsuarioRepository.Deletar(System.Int32)">
+            <summary>
+            Deleta um Usuario existente
+            </summary>
+            <param name="id">ID do usuario que será deletado</param>
+        </member>
+        <member name="M:Senai.InLock.WebApi.Interfaces.IUsuarioRepository.BuscarPorId(System.Int32)">
+            <summary>
+            Busca um usuário pelo seu ID
+            </summary>
+            <param name="id">ID do usuário que será buscado</param>
+            <returns>Retorna um usuário buscado</returns>
+        </member>
+    </members>
+</doc>
