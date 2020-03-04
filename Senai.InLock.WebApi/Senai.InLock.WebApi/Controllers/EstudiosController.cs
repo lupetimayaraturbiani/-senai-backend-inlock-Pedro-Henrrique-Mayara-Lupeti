@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Senai.InLock.WebApi.Domains;
@@ -43,6 +44,7 @@ namespace Senai.InLock.WebApi.Controllers
         }
 
         [HttpPut("{id}")]
+        [Authorize(Roles = "1")]
         public IActionResult Put(int id, EstudioDomain estudioAtualizado)
         {
             EstudioDomain estudioBuscado = _estudioRepository.BuscarPorId(id);
@@ -71,6 +73,7 @@ namespace Senai.InLock.WebApi.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize(Roles = "1")]
         public IActionResult Delete(int id)
         {
             EstudioDomain estudioBuscado = _estudioRepository.BuscarPorId(id);

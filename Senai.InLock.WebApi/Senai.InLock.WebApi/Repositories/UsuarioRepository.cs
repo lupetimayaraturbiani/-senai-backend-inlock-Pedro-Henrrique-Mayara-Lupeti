@@ -10,7 +10,7 @@ namespace Senai.InLock.WebApi.Repositories
 {
     public class UsuarioRepository : IUsuarioRepository
     {
-        private string stringConexao = "Data Source=DESKTOP-DEV601\\TSQLEXPRESS; initial catalog=InLock_Games_Tarde; user Id=sa; pwd=sa@123";
+        private string stringConexao = "Data Source=DEV22\\SQLEXPRESS; initial catalog=InLock_Games_Tarde; user Id=sa; pwd=sa@132";
 
         public void Atualizar(int id, UsuarioDomain UsuarioAtualizado)
         {
@@ -28,7 +28,6 @@ namespace Senai.InLock.WebApi.Repositories
                     con.Open();
 
                     cmd.ExecuteNonQuery();
-
                 }
             }
         }
@@ -37,7 +36,7 @@ namespace Senai.InLock.WebApi.Repositories
         {
             using (SqlConnection con = new SqlConnection(stringConexao))
             {
-                string querySelectById = "SELECT IdUsuario, Email, Senha, TipoUsuario.Titulo FROM Usuarios INNER JOIN TipoUsuario ON TipoUsuario.IdTipoUsuario = Usuarios.IdTipoUsuario WHERE IdUsuario = @ID";
+                string querySelectById = "SELECT IdUsuario, Email, Senha, TipoUsuario.Titulo, TipoUsuario.IdTipoUsuario FROM Usuarios INNER JOIN TipoUsuario ON TipoUsuario.IdTipoUsuario = Usuarios.IdTipoUsuario WHERE IdUsuario = @ID";
 
                 con.Open();
 
@@ -115,14 +114,13 @@ namespace Senai.InLock.WebApi.Repositories
 
             using (SqlConnection con = new SqlConnection(stringConexao))
             {
-                string query = "SELECT IdUsuario, Email, Senha, TipoUsuario.Titulo FROM Usuarios " +
-                                "INNER JOIN TipoUsuario ON TipoUsuario.IdTipoUsuario = Usuarios.IdTipoUsuario";
+                string querySelectAll = "SELECT IdUsuario, Email, Senha, TipoUsuario.Titulo, TipoUsuario.IdTipoUsuario FROM Usuarios INNER JOIN TipoUsuario ON TipoUsuario.IdTipoUsuario = Usuarios.IdTipoUsuario";
 
                 con.Open();
 
                 SqlDataReader rdr;
 
-                using (SqlCommand cmd = new SqlCommand(query, con))
+                using (SqlCommand cmd = new SqlCommand(querySelectAll, con))
                 {
                     rdr = cmd.ExecuteReader();
 
@@ -150,52 +148,52 @@ namespace Senai.InLock.WebApi.Repositories
 
         public UsuarioDomain BuscarPorEmailSenha(string email, string senha)
         {
-            
+
             using (SqlConnection con = new SqlConnection(stringConexao))
             {
-               
-                string querySelect = "SELECT U.IdUsuario, U.Email, U.IdTipoUsuario, TU.Titulo FROM Usuarios U INNER JOIN TiposUsuario TU ON U.IdTipoUsuario = TU.IdTipoUsuario WHERE Email = @Email AND Senha = @Senha";
 
-                
+                string querySelect = "SELECT U.IdUsuario, U.Email, U.IdTipoUsuario, TU.Titulo FROM Usuarios U INNER JOIN TipoUsuario TU ON U.IdTipoUsuario = TU.IdTipoUsuario WHERE Email = @Email AND Senha = @Senha";
+
+
                 using (SqlCommand cmd = new SqlCommand(querySelect, con))
                 {
-                    
+
                     cmd.Parameters.AddWithValue("@Email", email);
                     cmd.Parameters.AddWithValue("@Senha", senha);
 
-                    
+
                     con.Open();
 
-                   
+
                     SqlDataReader rdr = cmd.ExecuteReader();
 
-                    
+
                     if (rdr.Read())
                     {
-                        
+
                         UsuarioDomain usuario = new UsuarioDomain
                         {
-                            
+
                             IdUsuario = Convert.ToInt32(rdr["IdUsuario"]),
-                            
+
                             Email = rdr["Email"].ToString(),
-                            
+
                             IdTipoUsuario = Convert.ToInt32(rdr["IdTipoUsuario"]),
-                            
+
                             TipoUsuario = new TipoUsuarioDomain
                             {
                                 IdTipoUsuario = Convert.ToInt32(rdr["IdTipoUsuario"]),
-                                
+
                                 Titulo = rdr["Titulo"].ToString()
                             }
                         };
 
-                        
+
                         return usuario;
                     }
                 }
 
-               
+
                 return null;
             }
         }

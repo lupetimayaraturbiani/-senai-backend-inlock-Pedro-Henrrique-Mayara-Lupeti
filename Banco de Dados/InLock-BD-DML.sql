@@ -19,3 +19,7 @@ VALUES ('Diablo 3', 'É um jogo que contém bastante ação e é viciante, seja
 	   ('Red Dead Redemption', 'Jogo eletrônico de ação-aventura western',
 	    '26/10/2018', 120.00, 2);
 
+SELECT * FROM TipoUsuario;
+SELECT * FROM Usuarios;
+SELECT * FROM Estudios;
+SELECT * FROM Jogos;

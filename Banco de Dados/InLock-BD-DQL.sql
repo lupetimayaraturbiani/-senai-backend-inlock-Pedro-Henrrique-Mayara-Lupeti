@@ -22,9 +22,7 @@ FROM Jogos
 INNER JOIN Estudios ON Estudios.IdEstudio = Jogos.IdEstudio
 WHERE Jogos.IdJogo = '1';
 
-SELECT  Estudios.IdEstudio, Estudios.NomeEstudio FROM Estudios 
-WHERE Estudios.IdEstudio = '2';
-
-
-
-
+SELECT * FROM TipoUsuario;
+SELECT * FROM Usuarios;
+SELECT * FROM Estudios;
+SELECT * FROM Jogos;

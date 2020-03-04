@@ -11,8 +11,10 @@ using Senai.InLock.WebApi.Repositories;
 
 namespace Senai.InLock.WebApi.Controllers
 {
-    [Produces("application/json")]
     [Route("api/[controller]")]
+
+    [Produces("application/json")]
+
     [ApiController]
     public class UsuariosController : ControllerBase
     {
@@ -79,6 +81,7 @@ namespace Senai.InLock.WebApi.Controllers
 
 
         [Authorize(Roles = "1")]
+        [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
             UsuarioDomain usuarioProcurado = _usuarioRepository.BuscarPorId(id);

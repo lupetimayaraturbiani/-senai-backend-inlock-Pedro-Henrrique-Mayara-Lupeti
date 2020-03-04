@@ -16,8 +16,6 @@ namespace Senai.InLock.WebApi.Controllers
     [Produces("application/json")]
 
     [ApiController]
-
-    [Authorize]
     public class JogosController : ControllerBase
     {
         private IJogoRepository _jogoRepository { get; set; }
@@ -27,15 +25,14 @@ namespace Senai.InLock.WebApi.Controllers
             _jogoRepository = new JogoRepository();
         }
 
-        
         [HttpGet]
         public IActionResult Get()
         {
             return Ok(_jogoRepository.Listar());
         }
 
-        [Authorize(Roles = "1")]
         [HttpPost]
+        [Authorize(Roles = "1")]
         public IActionResult Post(JogoDomain novoJogo)
         {
             if (novoJogo.NomeJogo == null)
@@ -47,8 +44,8 @@ namespace Senai.InLock.WebApi.Controllers
             return Created("http://localhost:5000/api/Jogos", novoJogo);
         }
 
-        [Authorize(Roles = "1")]
         [HttpPut("{id}")]
+        [Authorize(Roles = "1")]
         public IActionResult Put(int id, JogoDomain jogoAtualizado)
         {
             JogoDomain jogoBuscado = _jogoRepository.BuscarPorId(id);
@@ -76,8 +73,8 @@ namespace Senai.InLock.WebApi.Controllers
                 );
         }
 
-        [Authorize(Roles = "1")]
         [HttpDelete("{id}")]
+        [Authorize(Roles = "1")]
         public IActionResult Delete(int id)
         {
             JogoDomain jogoBuscado = _jogoRepository.BuscarPorId(id);

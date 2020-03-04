@@ -19,9 +19,9 @@ namespace Senai.InLock.WebApi
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services
             // Adiciona o MVC ao projeto
-                .AddMvc()
+            services.AddMvc()
+
             // Define a versão do .NET Core
             .SetCompatibilityVersion(Microsoft.AspNetCore.Mvc.CompatibilityVersion.Version_2_1);
 
@@ -34,6 +34,7 @@ namespace Senai.InLock.WebApi
                 var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
                 c.IncludeXmlComments(xmlPath);
             });
+
 
             services
                 // Define a forma de autenticação
@@ -58,16 +59,16 @@ namespace Senai.InLock.WebApi
                         ValidateLifetime = true,
 
                         // Forma de criptografia
-                        IssuerSigningKey = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes("InLock-chave-autenticacao")),
+                        IssuerSigningKey = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes("inLock-chave-autenticacao")),
 
                         // Tempo de expiração do token
                         ClockSkew = TimeSpan.FromMinutes(30),
 
                         // Nome da issuer, de onde está vindo
-                        ValidIssuer = "InLock.WebApi",
+                        ValidIssuer = "inLock.WebApi",
 
                         // Nome da audience, de onde está vindo
-                        ValidAudience = "InLock.WebApi"
+                        ValidAudience = "inLock.WebApi"
                     };
                 });
         }
@@ -80,14 +81,11 @@ namespace Senai.InLock.WebApi
                 app.UseDeveloperExceptionPage();
             }
 
-            // Enable middleware to serve generated Swagger as a JSON endpoint.
             app.UseSwagger();
 
-            // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.),
-            // specifying the Swagger JSON endpoint.
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Senai.InLock.WebApi ");
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Senai.InLock.WebApi");
                 c.RoutePrefix = string.Empty;
             });
 
@@ -96,8 +94,6 @@ namespace Senai.InLock.WebApi
 
             // Habilita o uso do MVC
             app.UseMvc();
-
-
         }
     }
 }
